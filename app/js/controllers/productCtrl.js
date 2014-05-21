@@ -80,7 +80,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				$route.reload();
 			}
 		);
-	}
+	};
 }]);
 
 /* product matrix control

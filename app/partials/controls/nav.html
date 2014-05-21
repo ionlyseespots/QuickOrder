@@ -8,6 +8,12 @@
                             <i class="fa fa-arrow-left"></i>
                         </a>
                     </li>
+                    <li class="products" ng-show="user.Permissions.contains('ViewSelfAdmin')" ng-class="{'active': isInPath('quickorder')}">
+                        <a id="451qa_home_link" ng-show="Four51User.isAuthenticated()" href="quickorder">
+                            <i class="fa fa-flash"></i>
+                            <span class="hidden-xs">{{'Quick Order' | rc}}</span>
+                        </a>
+                    </li>
                     <li class="products" ng-class="{'active': isInPath('catalog') || isInPath('product') || isInPath('cart/default') || isInPath('search')}">
                         <a id="451qa_home_link" ng-show="Four51User.isAuthenticated()" href="catalog">
                             <i class="fa fa-home"></i>
@@ -93,12 +99,12 @@
             </div>
         </section>
     </nav>
-    <nav class="dropdown-mega">
+    <!--<nav class="dropdown-mega">
         <a class="dropdown-toggle text-center" data-toggle="dropdown">
             <i class="fa fa-angle-down text-primary"></i>
         </a>
         <ul class="451qa_topnav dropdown-menu" >
             <categorytree tree='tree' current='currentCategory' />
         </ul>
-    </nav>
+    </nav>-->
 </header>

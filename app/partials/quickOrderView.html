@@ -1,0 +1,41 @@
+<div class="row" ng-show="Products.length > 0">
+    <form name="search_products">
+        <div class="col-xs-8 col-xs-offset-2">
+            <input tabindex="1" class="form-control" placeholder="Search Products..." ng-model="product" style="min-height:0;" typeahead="product as (product.ExternalID + ' - ' + product.Name) for product in Products | filter:$viewValue | limitTo:10" />
+            <button tabindex="2" class="btn btn-small btn-success" type="submit" ng-click="selectProduct(product)">Select</div>
+        </div>
+    </form>
+</div>
+
+<div class="row" style="margin-top:25px;" ng-show="LineItem.Product">
+    <loadingindicator  ng-show="loadingProduct" title="{{'Please wait while we load your product' | r}}"/>
+    <loadingindicator  ng-show="addingToOrder" title="{{'Please wait while we update your order' | r}}"/>
+    <div class="col-xs-8 col-xs-offset-2">
+        <div class="row">
+            <div class="col-xs-5">
+                <div id="451_list_vspec">
+                    <div class="form-group" ng-repeat="s in LineItem.Product.Specs | onproperty:[{Property: 'CanSetForLineItem', Value: true}, {Property: 'DefinesVariant', Value: true}]">
+                        <customfilefield tabindex="$index" customfield="s" ng-if="s.ControlType == 'File'"></customfilefield>
+                        <customtextfield tabindex="$index" customfield="s" ng-if="s.ControlType == 'Text'"></customtextfield>
+                        <customselectionfield tabindex="$index" change="specChanged" customfield="s" ng-if="s.ControlType == 'Selection'"></customselectionfield>
+                    </div>
+                </div>
+                <div class="view-form-icon" ng-if="!allowAddFromVariantList">
+                    <div>
+                        <label ng-class="{required: !allowAddFromVariantList}" ng-hide="allowAddFromVariantList">{{'Order' | r}} {{'Quantity' | r}}</label>
+                        <quantityfield required="true" lineitem="LineItem" class="quantity" />
+                    </div>
+                </div>
+                <div class="btn btn-small btn-success pull-right" style="margin-top:10px;" ng-click="orderProduct(LineItem)">Add to Order</div>
+            </div>
+            <div class="col-xs-3">
+                <figure>
+                    <img style="width:100%" ng-src="{{LineItem.Product.LargeImageUrl}}"/>
+                </figure>
+            </div>
+            <div class="col-xs-4 well">
+                <small>{{LineItem.Product.Description}}</small>
+            </div>
+        </div>
+    </div>
+</div>
